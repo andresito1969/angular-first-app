@@ -79,7 +79,8 @@
         template <-> TS Two way binding
 
         Two way binding
-            We need to enable ngModel, so we need to add *FormsModule* to imports[] in AppModule, and obviously import {...} from ...
+            We need to enable ngModel, so we need to add *FormsModule* to imports[] 
+            in AppModule, and obviously import {...} from ...
         
     
     ## Directives
