@@ -1,3 +1,110 @@
+### CLI
+    Instalar angular cli
+        npm install -g @angular/cli
+    Crear app
+        ng new {AppName} --no-strict --standalone false --routing false
+    Iniciar server
+        ng serve
+    Crear componente (ng g c {name})
+        ng generate component {ComponentName}
+
+
+
+
+
+
+
+
+
+### Work flow
+    index.html -> cli compila y ejecuta main.ts
+    
+    main.ts -> es nuestro primer código js a cargar, 
+    este código básicamente inicia la app (app/app.module.ts)
+    
+    app.module.ts -> Tenemos la construcción de como incluiremos 
+    nuestras páginas, tenemos en bootstrap :[] los componentes 
+    a cargar al iniciar la app (index.html).
+    
+    app.component.ts -> instancia la vista y sus estilos
+
+    spec.ts files are for testing
+
+
+
+
+### Course fundamentals
+
+    ## COMPONENT
+        Normally we want to create our components inside app 
+        folder, and each component will have it's own directory.
+        
+        Also our app.component.html will notice new components, 
+        not our index.html.
+        
+        Component is a "typescript class" (in reality angular 
+        needs to know that it's a component, not a regular class), 
+        angular can instanciate it
+        so we need an special decorator in order to use it 
+        (@Component({ selector: 'should-b-unique', templateUrl: './path.html' })).
+
+        It would look like this:
+            app/server/server.component.ts <- 
+            @Component({}) export class ServerComponent{}
+            
+            app/server/server.component.html <- html
+
+        // MODULE
+        And we need to add this component in app.module.ts 
+        inside *bootstrap*, so we can configure our components
+        
+        normally we will use one app module, but in larger 
+        projects we can have multiple modules.
+
+        // standalone components are new, thats why most of the legacy 
+        code is in ngModule, standalone is like angular1EduVersion 
+        (graphs, newscreens) { template: '<tag>', ....}
+
+    ## DATABINDING
+        Comunication between business logic (ts) 
+        and template, we can achieve this by:
+        
+        {{variable // interpolation}} [property // disabled] ="data" //prop binding     
+        TS ->  template (output data) one way binding
+        
+        (event) = "expression" Event binding                                            
+        template ->  TS (React to client events) one way binding
+        
+        [(ngModel)] = "data"                                                            
+        template <-> TS Two way binding
+
+        Two way binding
+            We need to enable ngModel, so we need to add *FormsModule* to imports[] 
+            in AppModule, and obviously import {...} from ...
+        
+    
+    ## Directives
+
+    Services & Dependency Injection
+
+    Routing
+
+    Observables
+
+    Forms
+
+    Pipes
+
+    Http
+
+    Authentication
+
+    Optimizations & NgModules
+
+    Deployment
+
+    Animations & Testing
+
 # MyFirstApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
