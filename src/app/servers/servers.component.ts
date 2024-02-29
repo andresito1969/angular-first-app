@@ -10,11 +10,18 @@ import { Component } from '@angular/core';
   styleUrl: './servers.component.css'
 })
 export class ServersComponent {
-  allowNewServer = false;
+  allowNewServer: boolean = false;
+  serverCreationStatus: string = "No server was created";
+  serverName: string = '';
+
   constructor() {
     console.log("aa");
     setTimeout(()=> {
       this.allowNewServer = true;
     }, 2000);
   }
+
+  onCreateServer = () => this.serverCreationStatus = "Server created";
+
+  onUpdateServerName = (event : Event) => this.serverName = (<HTMLInputElement>event.target).value; 
 }
