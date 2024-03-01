@@ -21,5 +21,15 @@
     <p>Angular 17: No server</p>
 }
 
-<app-server></app-server>
-<app-server></app-server>
+<app-server *ngFor="let server of servers"></app-server>
+
+<p>Funciona el for con syntax &#64;for ?</p>
+@for(angular of angular17List; track $index) {
+    <li>
+        @if(angular < 17) {
+            No funciona para angular: {{angular}}
+        } @else {
+            Funciona para angular: {{angular}} 
+        }
+    </li>
+}
