@@ -1,0 +1,12 @@
+<button 
+    (click)="toggleParagraph()">
+    {{toggleDetails ? 'Hide Details' : 'Display Details'}}
+</button>
+
+<p *ngIf="toggleDetails" class="text-color-andres">Secret Password = tuna</p>
+
+<div *ngFor="let click of logClicks">
+    <p
+    [ngStyle]="{backgroundColor: click > 4 ? 'blue' : ''}"
+    [ngClass]="{'text-color-andres': click > 4}">{{ click }}</p>
+</div>
