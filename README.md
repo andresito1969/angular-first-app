@@ -8,6 +8,8 @@
     Crear componente (ng g c {name})
         ng generate component {ComponentName}
 
+npm install --save bootstrap@3
+
 
 
 
@@ -83,8 +85,30 @@
             in AppModule, and obviously import {...} from ...
         
     
-    ## Directives
+## Directives conditionals(if else), style, class, for
+        if else -> symbols: * , #    in angular 17 there is another 
+        syntax more friendly (like laravel)
+        * structural directive because it changes the dom, we use it in if or for.
+        
+        Directives are instructions in the DOM, components are 
+        kind of directives: for, if are directives also
 
+        Custom (not in deep): <p turnGreen>Turns green</p> -> 
+        @Directive({selector: '[turnGreen]'}) export class turngreendirective{}
+
+        ## IF -> * <-
+        we write it like this: <p *ngIf="isBool"> we need the *star*
+
+        ## Else ->#<- this is a local reference
+        In order to perform an else we need to mark with ng-template 
+        and a local reference where we want to attack in the if, so:
+        <p *ngIf="isPretty; else isNotPretty">User is pretty</p>  ----> 
+        <ng-template #isNotPretty><p> is not pretty</p></ng-template>
+
+        ## For -> * <-
+
+   ## Ended for now, more in next repositories
+    
     Services & Dependency Injection
 
     Routing
