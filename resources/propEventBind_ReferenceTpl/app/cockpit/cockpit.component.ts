@@ -10,7 +10,7 @@ export class CockpitComponent {
   @Output() childAddBlueprint = new EventEmitter<{serverName: string, serverContent: string}>();
   // newServerName = '';
   // newServerContent = '';
-  @ViewChild('serverContentInp') serverContentInp: ElementRef;
+  @ViewChild('serverContentInp', {static: true}) serverContentInp: ElementRef;
 
   onAddServer(serverName : HTMLInputElement) {
     this.childAddServer.emit({
