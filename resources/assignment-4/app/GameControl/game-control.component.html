@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-6">
+        <button (click)="startTimer()">Start</button>
+    </div>
+    <div class="col-md-6">
+        <button (click)="stopTimer()">Stop</button>
+    </div>
+</div>
+<div class="row">
+    <app-odd *ngFor="let oddValue of oddList" [odd]="oddValue"></app-odd>
+</div>
+<div class="row">
+    <app-even *ngFor="let evenValue of evenList" [even]="evenValue"></app-even>
+</div>
