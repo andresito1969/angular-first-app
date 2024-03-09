@@ -216,9 +216,54 @@ npm install --save bootstrap@3
 
 
     Routing
-        As a prop binding, /route <- correct    , incorrect -> route  // route is a relative path
+        // Router creation and display view in template
+        In our app module we can define a router like this:
 
-        route observables subscribe to a possibly changed route and update values from component
+        const appRoutes: Routes = [{path: '', component: HomeComponent},
+        {path: 'tal', component: Tal, children: [{path: :id/lel, ...}]} ]
+
+        And then put it inside imports...
+        @NgModule({declarations.., imports: [RouterModule.forRoot(appRoutes)]})
+
+        //And now we have our router working, but it's better to have it in another file!
+        So we have the same but in another file and then in our appModule we import the class
+        of the external router.module.ts
+
+        Display view, in template we use: <router-outlet></router-outlet>
+
+
+        ##Router navigate: As a prop binding, /route <- correct    , 
+        incorrect -> route  // route is a relative path 
+        
+        // Router navigate in template: routerLink
+        <li role="presentation" class="active"><a routerLink="/">Home</a></li>
+        <a [routerLink] = "['/users', 10, 'tal']">Load user 10</a>
+        <a
+             [routerLink]="['/servers', 5, 'edit']"
+            [queryParams]="{allowEdit: '1'}"
+            fragment="loading">
+
+
+        // Router navigate in ts: this.router.navigate(['/servers'])
+        We need to of course add router in constructor (private router: Router)
+        this.router.navigate(['/servers', id, 'edit'], 
+        {queryParams: {allowEdit: '1'}, fragment: 'loading'});
+
+
+        // Retrieve query params:
+        this.route.snapshot.params["id"] // /route/:id   and we need constructor route
+
+
+
+        // Functionalities: routerLinkActive="active" -> in template
+        [routerLinkActiveOptions] = "{exact: true}"
+
+        in router module.ts we can add a wildcard route and redirect to error template:
+        {path: '**', // wildcard route, always at the bottom
+        redirectTo: '/not-found'}
+
+        More in docu or repo github...
+        
     Observables
 
     Forms
