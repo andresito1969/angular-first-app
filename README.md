@@ -64,46 +64,60 @@ npm install --save bootstrap@3
         standalone is like angular1EduVersion (graphs, newscreens) { template: '<tag>', ....}
 
         // view encapsulation, in order to use or not default css, by default views are encapsulated
+        
     ## DATABINDING
         Comunication between business logic (ts) and template, we can achieve this by:
-        {{variable // interpolation}} [property // disabled] ="data" //prop binding     TS ->  template (output data) one way binding
-        (event) = "expression" Event binding                                            template ->  TS (React to client events) one way binding
-        [(ngModel)] = "data"                                                            template <-> TS Two way binding
+        {{variable // interpolation}} [property // disabled] ="data" //prop binding     
+        TS ->  template (output data) one way binding
+        
+        (event) = "expression" Event binding                                            
+        template ->  TS (React to client events) one way binding
+        
+        [(ngModel)] = "data"                                                            
+        template <-> TS Two way binding
 
         Two way binding
-            We need to enable ngModel, so we need to add *FormsModule* to imports[] in AppModule, and obviously import {...} from ...
+            We need to enable ngModel, so we need to add *FormsModule* to imports[] 
+            in AppModule, and obviously import {...} from ...
             This also allows us to send a form without reloading
         
         Local refrence in template
-        <input #localRef>    <- we can use localRef in all of our template, but not in typescript, the way to use it is binding into a function
+        <input #localRef>    <- we can use localRef in all of our template, 
+        but not in typescript, the way to use it is binding into a function
         tsFunction = (inputValue: HTMLInputElement)
 
         We can achieve the same with @ViewChild
     
     ## Directives conditionals(if else), style, class, for
-        if else -> symbols: * , #    in angular 17 there is another syntax more friendly (like laravel)
+        if else -> symbols: * , #    in angular 17 there is another syntax 
+        more friendly (like laravel)
         * structural directive because it changes the dom, we use it in if or for.
         
         Instructions in the DOM, components are kind of directives, for, if are directives also
 
-        Custom (not in deep): <p turnGreen>Turns green</p> -> @Directive({selector: '[turnGreen]'}) export class turngreendirective{}
+        Custom (not in deep): <p turnGreen>Turns green</p> -> 
+        @Directive({selector: '[turnGreen]'}) export class turngreendirective{}
 
         ## IF -> * <-
         we write it like this: <p *ngIf="isBool"> we need the *star*
 
         ## Else ->#<- this is a local reference
-        In order to perform an else we need to mark with ng-template and a local reference where we want to attack in the if, so:
-        <p *ngIf="isPretty; else isNotPretty">User is pretty</p>  ----> <ng-template #isNotPretty><p> is not pretty</p></ng-template>
+        In order to perform an else we need to mark with ng-template and a local 
+        reference where we want to attack in the if, so:
+        <p *ngIf="isPretty; else isNotPretty">User is pretty</p>  ----> 
+        <ng-template #isNotPretty><p> is not pretty</p></ng-template>
 
         ## For -> * <-
 
-        Model: A ts file that will define our business logic, basically it helps typescript define how an array of models should look like.
+        Model: A ts file that will define our business logic, basically 
+        it helps typescript define how an array of models should look like.
         Example i have from the DB a list of users, every user will have age, name etc.
         So i can create a model in ts, that defines that age will be number, name string etc.
         And then if i retrieve a single user or the list of all users i can use this model like:
         userList : User[] = [] or user : User = {name, age....}
 
-    // BELOW \\ CHECK angular-second-app more details there! :D grand parents, grand sonds xdd binding events or even props
+    // BELOW \\ CHECK angular-second-app more details there! :D grand parents, 
+    grand sonds xdd binding events or even props
 
     ## Bind prop from parent component to child htmldad -> [childProp]="parentElem"     |  @Input
     tsChild -> @Input() childProp: ...;
@@ -128,7 +142,8 @@ npm install --save bootstrap@3
 
     ## CUSTOM DIRECTIVE
         @Directive({selector: '[appMyDirectiveName]'}) // [] <- when I add to element
-        export class MyDirectiveName{constructor (private elementRef: ElementRef); ngOnInit() => this.elementRef.nativeElement.style.bgColor = "red"}
+        export class MyDirectiveName{constructor (private elementRef: ElementRef); 
+        ngOnInit() => this.elementRef.nativeElement.style.bgColor = "red"}
 
         Import that directive in *module declarations* and use it wherever!
 
@@ -136,39 +151,52 @@ npm install --save bootstrap@3
         
         // below better
         ng g d better-directive
-        constructor(private eleRef: ElementRef, private renderer: Renderer2); ngOnInit() => this.renderer.setStyle(this.eleRef.nativeElement, 'bgcolor', 'blue');
+        constructor(private eleRef: ElementRef, private renderer: Renderer2); 
+        ngOnInit() => this.renderer.setStyle(this.eleRef.nativeElement, 'bgcolor', 'blue');
 
-        @HostListener('mouseenter') mouseOver(eventData: event) => { this.renderer.setStyle(....)} same with @HostListener('mouseleave')
+        @HostListener('mouseenter') mouseOver(eventData: event) => 
+        { this.renderer.setStyle(....)} same with @HostListener('mouseleave')
 
         // easier way below
-        @HostBinding('style.bgcolor') bgColor: string = 'transparent'; @Hostlistener... => {this.bgColor = 'red' }
+        @HostBinding('style.bgcolor') bgColor: string = 'transparent'; @Hostlistener... => 
+        {this.bgColor = 'red' }
 
 
 
 
     // Services & Dependency Injection
-        So basically a service is a class that we use in order to share the logic that will be common in our app, also is a nice way of communicating with our components,
-        why? Because for example we can use a service to get the common logic between a function that will be used in all of our app.
+        So basically a service is a class that we use in order to share the logic that will be 
+        common in our app, also is a nice way of communicating with our components,
+        why? Because for example we can use a service to get the common logic between 
+        a function that will be used in all of our app.
         In the other way we can communicate our components thanks to singleton and service hierarchy.
 
-        That's how a service look like:  logging.service.ts -> export class LoggingService{ logStatusChange(status: string) => console.log("Service logger with status: " + status) }.
+        That's how a service look like:  logging.service.ts -> export class LoggingService{ 
+        logStatusChange(status: string) => console.log("Service logger with status: " + status) }.
 
         // import module
-        *Service inject to another service* <- that's what we can achieve and also we can inject it in all the app components.
+        *Service inject to another service* <- that's what we can achieve and also 
+        we can inject it in all the app components.
         @NgModule({ ... , providers: [OurProvider]})
 
         So if we want to use in a component we can instanciate it via constructor -> 
-        constructor(private accountsService: AccountsService) {} <- and now we can use it in this component with this.accountsService
-        If we call via @Component({..., providers: [OurProvider] }) <- we get a factory so it's a new instance
-        If we don't call it, we can use it anyways cause we imported it already in module, so it will be a single instance of parent :D 
+        constructor(private accountsService: AccountsService) {} -> 
+        and now we can use it in this component with this.accountsService
+        
+        If we call via @Component({..., providers: [OurProvider] }) -> 
+        we get a factory so it's a new instance
+        If we don't call it, we can use it anyways cause we imported it already 
+        in module, so it will be a single instance of parent :D 
 
         // import app.component
-        *Service inject to all app components but not inside another service* -> thanks to @Component({..., providers: [OurProvider]})
+        *Service inject to all app components but not inside another service* -> 
+        thanks to @Component({..., providers: [OurProvider]})
 
         Service injected to another service, we can see this in our udemy task 5, but anyway:
         In our main service the one that will use the service, we have to firstly allow to be so with : @Injectable()
 
-        Then we have to call to the constructor -> constructor(private loggingService: LoggingService) {} and now we can use another service
+        Then we have to call to the constructor -> 
+        constructor(private loggingService: LoggingService) {} and now we can use another service
 
 
         // import parentComponent
@@ -177,9 +205,11 @@ npm install --save bootstrap@3
         *Communicate event/prop binding better way*
         Main service: statusUpdated = new EventEmitter<string>(); (To allow communication in our service logic)
 
-        The emitter component will: this.accountService.statusUpdated.emit(status) <- *statusUpdated* called thanks to constructor prop call this.accountService
+        The emitter component will: this.accountService.statusUpdated.emit(status) -> 
+        *statusUpdated* called thanks to constructor prop call this.accountService
         
-        And the receiver component will: this.accountService.statusUpdated.subscribe( (status:string) => alert(status + "received")) ->
+        And the receiver component will: this.accountService.statusUpdated.subscribe( (status:string) => 
+        alert(status + "received")) ->
         subscribed and as a callback function will get the emit value!
 
 
