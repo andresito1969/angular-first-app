@@ -11,7 +11,8 @@
         ng g d better-directive
 
 npm install --save bootstrap@3
-
+npm install --save rxjs@6
+npm install --save rxjs-compat
 
 
 
@@ -265,7 +266,33 @@ npm install --save bootstrap@3
         More in docu or repo github...
         
     Observables
+        We are rarelly going to use observables, but anyways here is how we can use it:
+        
+        first we need to install the library rxjs in our project, and here is a sample code
+        const customIntervalObservable = Observable.create(observer => {
+            let compt = 0;
+            setInterval(() => {
+                observer.next(compt);
+                if(compt == 2) observer.complete() // also done
+                if(compt > 3) {
+                observer.error(new Error('Count is gt than 3')) // error throw = auutomatic unsubscribe
+                }
+                compt++;
+            }, 1000)
+        })
 
+        this.firstObsSubscription = customIntervalObservable.subscribe(data => {
+            console.log(data);
+            }, error => {
+            console.log(error)
+            }, () => {
+            console.log('completed func')
+        })
+
+
+        !!** We need to unsubscribe the observables we create, cause it can cause memory leaks**!!
+        Our native angular subscriptions are not needed to unsubscribe cause angular handles em.
+        
     Forms
 
     Pipes
