@@ -165,7 +165,7 @@ npm install --save rxjs-compat
 
 
 
-    // Services & Dependency Injection
+    ## Services & Dependency Injection
         So basically a service is a class that we use in order to share the logic that will be 
         common in our app, also is a nice way of communicating with our components,
         why? Because for example we can use a service to get the common logic between 
@@ -216,7 +216,7 @@ npm install --save rxjs-compat
 
 
 
-    Routing
+    ## Routing
         // Router creation and display view in template
         In our app module we can define a router like this:
 
@@ -265,7 +265,7 @@ npm install --save rxjs-compat
 
         More in docu or repo github...
         
-    Observables
+    ## Observables
         We are rarelly going to use observables, but anyways here is how we can use it:
         
         first we need to install the library rxjs in our project, and here is a sample code
@@ -293,11 +293,40 @@ npm install --save rxjs-compat
         !!** We need to unsubscribe the observables we create, cause it can cause memory leaks**!!
         Our native angular subscriptions are not needed to unsubscribe cause angular handles em.
         
-    Forms
+    //FORMS\\ TD and reactive
+    ## Forms TD (template driven) [FormsModule]
+        First we have to make sure that we have in our app modules the import in imports: [FormsModule]
 
+        We have to manage our data in the template so in order that our template notices
+        which inputs are controlled by the ngform, we need to tell with ngModel and name="..."
+        <input type="text" id="username" class="form-control"
+            ngModel name="username">
+
+        Then our form element needs to also have the send method and the elements that inputs that we control
+        with ngSubmit, template ref # and using ngForm as value of templateRef.
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+        And finally our controller ts will:  onSubmit(form: NgForm) {console.log(form.value);}
+
+        button disabled if invalid form, we can add validation in template (check docs), required, email directives..
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+
+        // control element with reference and ngModel
+        Control with referentece tpl ngModel name="email" required email #email="ngModel">
+        and then we add this in an if:
+        <span class="help-block" *ngIf="!email.valid && email.touched">Enter a valid email</span>
+
+        // group form control ngModelGroup we can also add it in ref #userData="ngModelGroup"
+        Group form controls => <div id="user-data" ngModelGroup="userData"> so everything
+        wrapped in this div, will be in a object with key userData when we retrieve value
+
+
+    ## Forms reactive [ReactiveFormsModule] we don't need forms module if its all reactive
+        First we need in imports module [ReactiveFormsModule]
+        Better check docs, but in github my-first-app there is more info
     Pipes
 
-    Http
+    ## Http
 
     Authentication
 
